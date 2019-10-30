@@ -439,4 +439,4 @@ printPercentile(50);
 printPercentile(90);
 printPercentile(95);
 
-console.log(allEvaluations.length)
+console.log(allEvaluations.length);

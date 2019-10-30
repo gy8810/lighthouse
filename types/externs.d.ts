@@ -238,7 +238,6 @@ declare global {
           styleSheetUrl?: string;
           timerId?: string;
           url?: string;
-          candidateIndex?: number;
         };
         frame?: string;
         name?: string;
