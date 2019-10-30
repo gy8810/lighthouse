@@ -15,17 +15,18 @@ const LanternLargestContentfulPaint =
 /* eslint-env jest */
 describe('Metrics: Lantern LCP', () => {
   it('should compute predicted value', async () => {
+    const settings = {};
     const computedCache = new Map();
-    const result = await LanternLargestContentfulPaint.request({trace, devtoolsLog,
-      settings: {}}, {computedCache});
+    const result = await LanternLargestContentfulPaint.request({trace, devtoolsLog, settings},
+       {computedCache});
 
     expect({
       timing: Math.round(result.timing),
       optimistic: Math.round(result.optimisticEstimate.timeInMs),
       pessimistic: Math.round(result.pessimisticEstimate.timeInMs),
     }).toMatchSnapshot();
-    assert.equal(result.optimisticEstimate.nodeTimings.size, 5);
-    assert.equal(result.pessimisticEstimate.nodeTimings.size, 8);
+    assert.equal(result.optimisticEstimate.nodeTimings.size, 101);
+    assert.equal(result.pessimisticEstimate.nodeTimings.size, 102);
     assert.ok(result.optimisticGraph, 'should have created optimistic graph');
     assert.ok(result.pessimisticGraph, 'should have created pessimistic graph');
   });
