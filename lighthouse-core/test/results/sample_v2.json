@@ -89,6 +89,14 @@
       "numericValue": 3969.136,
       "displayValue": "4.0 s"
     },
+    "largest-contentful-paint": {
+      "id": "largest-contentful-paint",
+      "title": "Largest Contentful Paint",
+      "description": "Largest Contentful Paint marks the time at which the largest text or image is painted. [Learn More](https://web.dev/largest-contentful-paint)",
+      "score": null,
+      "scoreDisplayMode": "error",
+      "errorMessage": "Something went wrong with recording the trace over your page load. Please run Lighthouse again. (NO_LCP)"
+    },
     "load-fast-enough-for-pwa": {
       "id": "load-fast-enough-for-pwa",
       "title": "Page load is fast enough on mobile networks",
@@ -3474,6 +3482,11 @@
           "group": "metrics"
         },
         {
+          "id": "largest-contentful-paint",
+          "weight": 0,
+          "group": "metrics"
+        },
+        {
           "id": "speed-index",
           "weight": 4,
           "group": "metrics"
@@ -4335,6 +4348,18 @@
       },
       {
         "startTime": 0,
+        "name": "lh:audit:largest-contentful-paint",
+        "duration": 100,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 0,
+        "name": "lh:computed:LargestContentfulPaint",
+        "duration": 100,
+        "entryType": "measure"
+      },
+      {
+        "startTime": 0,
         "name": "lh:audit:load-fast-enough-for-pwa",
         "duration": 100,
         "entryType": "measure"
@@ -4654,12 +4679,6 @@
       {
         "startTime": 0,
         "name": "lh:computed:TimingSummary",
-        "duration": 100,
-        "entryType": "measure"
-      },
-      {
-        "startTime": 0,
-        "name": "lh:computed:LargestContentfulPaint",
         "duration": 100,
         "entryType": "measure"
       },
@@ -5379,6 +5398,20 @@
       ],
       "lighthouse-core/audits/metrics/first-meaningful-paint.js | description": [
         "audits[first-meaningful-paint].description"
+      ],
+      "lighthouse-core/audits/metrics/largest-contentful-paint.js | title": [
+        "audits[largest-contentful-paint].title"
+      ],
+      "lighthouse-core/audits/metrics/largest-contentful-paint.js | description": [
+        "audits[largest-contentful-paint].description"
+      ],
+      "lighthouse-core/lib/lh-error.js | badTraceRecording": [
+        {
+          "values": {
+            "errorCode": "NO_LCP"
+          },
+          "path": "audits[largest-contentful-paint].errorMessage"
+        }
       ],
       "lighthouse-core/audits/load-fast-enough-for-pwa.js | title": [
         "audits[load-fast-enough-for-pwa].title"
