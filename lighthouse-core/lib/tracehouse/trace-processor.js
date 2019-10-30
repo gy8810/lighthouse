@@ -524,15 +524,25 @@ class TraceProcessor {
       firstMeaningfulPaint = lastCandidate;
     }
 
+    // LCP's trace event was first introduced in m78. We can't surface an LCP for older Chrome versions
     // LCP comes from the latest `largestContentfulPaint::Candidate`, but it can be invalidated
     // by a `largestContentfulPaint::Invalidate` event. In the case that the last candidate is
     // invalidated, the value will be undefined.
     let largestContentfulPaint;
+    let lcpInvalidated = false;
+    // Iterate the events backwards.
     for (let i = frameEvents.length - 1; i >= 0; i--) {
       const e = frameEvents[i];
+      // If the event's timestamp is before the navigation start, stop.
       if (e.ts <= navigationStart.ts) break;
-      if (e.name === 'largestContentfulPaint::Invalidate') break;
+      // If the last lcp event in the trace is 'Invalidate', there is inconclusive data to determine LCP.
+      if (e.name === 'largestContentfulPaint::Invalidate') {
+        lcpInvalidated = true;
+        break;
+      }
+      // If not an lcp 'Candidate', keep iterating.
       if (e.name !== 'largestContentfulPaint::Candidate') continue;
+      // Found the last LCP candidate in the trace, let's use it.
       largestContentfulPaint = e;
       break;
     }
@@ -596,9 +606,11 @@ class TraceProcessor {
       firstPaintEvt: firstPaint,
       firstContentfulPaintEvt: firstContentfulPaint,
       firstMeaningfulPaintEvt: firstMeaningfulPaint,
+      largestContentfulPaintEvt: largestContentfulPaint,
       loadEvt: load,
       domContentLoadedEvt: domContentLoaded,
       fmpFellBack,
+      lcpInvalidated,
     };
   }
 }
