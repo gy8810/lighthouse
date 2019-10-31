@@ -28,7 +28,7 @@ sleep 5
 source /home/lighthouse/.env
 
 # Run the collection
-DEBUG=1 SAMPLES=1 node ./lighthouse-core/scripts/lantern/collect/collect.js
+DEBUG=1 SAMPLES=9 node ./lighthouse-core/scripts/lantern/collect/collect.js
 
 # Kill xvfb
 kill $!
