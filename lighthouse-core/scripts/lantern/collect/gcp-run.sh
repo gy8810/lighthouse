@@ -28,7 +28,7 @@ sleep 5
 source /home/lighthouse/.env
 
 # Run the collection
-DEBUG=1 SAMPLES=9 node ./lighthouse-core/scripts/lantern/collect/collect.js
+DEBUG=1 SAMPLES=9 node --max-old-space-size=4096 ./lighthouse-core/scripts/lantern/collect/collect.js
 
 cp /home/lighthouse/screen.log /home/lighthouse/previous-screen.log
 
