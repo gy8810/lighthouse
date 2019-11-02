@@ -5,7 +5,7 @@
  */
 'use strict';
 
-/** @typedef {{devtoolsLog?: string, lhr: string, trace: string}} Result */
+/** @typedef {{devtoolsLog?: string, lhr?: string, trace?: string}} Result */
 /** @typedef {Result & {metrics: import('../../../audits/metrics.js').UberMetricsItem}} ResultWithMetrics */
 /** @typedef {{url: string, wpt: Result[], unthrottled: Result[]}} Summary */
 

@@ -154,9 +154,12 @@ async function runForWpt(url) {
  * @param {() => Promise<Result>} asyncFn
  */
 async function repeatUntilPass(asyncFn) {
+  let attempt = 0
   // eslint-disable-next-line no-constant-condition
   while (true) {
+    if (attempt > 3) return {}
     try {
+      attempt++
       return await asyncFn();
     } catch (err) {
       log.log(err, 'error....');
@@ -243,14 +246,14 @@ async function main() {
 
     const urlResultSet = {
       url,
-      wpt: wptResults.map((result, i) => {
+      wpt: wptResults.filter(result => result.lhr && result.trace).map((result, i) => {
         const prefix = `${sanitizedUrl}-mobile-wpt-${i + 1}`;
         return {
           lhr: saveData(`${prefix}-lhr.json`, result.lhr),
           trace: saveData(`${prefix}-trace.json`, result.trace),
         };
       }),
-      unthrottled: unthrottledResults.map((result, i) => {
+      unthrottled: unthrottledResults.filter(result => result.lhr && result.trace).map((result, i) => {
         if (!result.devtoolsLog) throw new Error('expected devtools log');
 
         const prefix = `${sanitizedUrl}-mobile-unthrottled-${i + 1}`;
