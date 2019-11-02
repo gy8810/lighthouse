@@ -446,15 +446,6 @@ class GatherRunner {
   }
 
   /**
-   * 
-   * @param {string} hostUserAgent
-   */
-  static getHostDevice(hostUserAgent) {
-    return hostUserAgent.includes('Android') || hostUserAgent.includes('Mobile') ?
-      'mobile' : 'desktop';
-  }
-
-  /**
    * Return an initialized but mostly empty set of base artifacts, to be
    * populated as the run continues.
    * @param {{driver: Driver, requestedUrl: string, settings: LH.Config.Settings}} options
