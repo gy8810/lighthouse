@@ -25,7 +25,7 @@ const config = {
   audits: [
     // 75th and 95th percentiles -> median and PODR
     // SELECT QUANTILES(renderStart, 21) FROM [httparchive:summary_pages.2018_12_15_desktop] LIMIT 1000
-    {path: 'metrics/first-contentful-paint', options: {scorePODR: 800, scoreMedian: 1600}},
+    // {path: 'metrics/first-contentful-paint', options: {scorePODR: 800, scoreMedian: 1600}},
     {path: 'metrics/first-meaningful-paint', options: {scorePODR: 800, scoreMedian: 1600}},
     // 75th and 95th percentiles -> median and PODR
     // SELECT QUANTILES(SpeedIndex, 21) FROM [httparchive:summary_pages.2018_12_15_desktop] LIMIT 1000
