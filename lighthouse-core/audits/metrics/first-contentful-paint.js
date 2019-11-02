@@ -27,21 +27,31 @@ class FirstContentfulPaint extends Audit {
       title: str_(i18n.UIStrings.firstContentfulPaintMetric),
       description: str_(UIStrings.description),
       scoreDisplayMode: Audit.SCORING_MODES.NUMERIC,
-      requiredArtifacts: ['traces', 'devtoolsLogs'],
+      requiredArtifacts: ['traces', 'devtoolsLogs', 'HostDevice'],
     };
   }
 
   /**
+   * @param {LH.Artifacts} artifacts
+   * @param {LH.Audit.Context} context
    * @return {LH.Audit.ScoreOptions}
    */
-  static get defaultOptions() {
-    return {
-      // 75th and 95th percentiles HTTPArchive -> median and PODR
-      // https://bigquery.cloud.google.com/table/httparchive:lighthouse.2018_04_01_mobile?pli=1
-      // see https://www.desmos.com/calculator/2t1ugwykrl
-      scorePODR: 2000,
-      scoreMedian: 4000,
-    };
+  static getDefaultScoreOptions(artifacts, context) {
+    if (context.settings.emulatedFormFactor === 'mobile' || artifacts.HostDevice === 'mobile') {
+      return {
+        // 75th and 95th percentiles HTTPArchive -> median and PODR
+        // https://bigquery.cloud.google.com/table/httparchive:lighthouse.2018_04_01_mobile?pli=1
+        // see https://www.desmos.com/calculator/2t1ugwykrl
+        scorePODR: 2000,
+        scoreMedian: 4000,
+      };
+    } else {
+      return {
+        // SELECT QUANTILES(renderStart, 21) FROM [httparchive:summary_pages.2018_12_15_desktop] LIMIT 1000
+        scorePODR: 800,
+        scoreMedian: 1600,
+      }
+    }
   }
 
   /**
@@ -54,12 +64,13 @@ class FirstContentfulPaint extends Audit {
     const devtoolsLog = artifacts.devtoolsLogs[Audit.DEFAULT_PASS];
     const metricComputationData = {trace, devtoolsLog, settings: context.settings};
     const metricResult = await ComputedFcp.request(metricComputationData, context);
+    const scoreOptions = context.options || this.getDefaultScoreOptions(artifacts, context);
 
     return {
       score: Audit.computeLogNormalScore(
         metricResult.timing,
-        context.options.scorePODR,
-        context.options.scoreMedian
+        scoreOptions.scorePODR,
+        scoreOptions.scoreMedian
       ),
       numericValue: metricResult.timing,
       displayValue: str_(i18n.UIStrings.seconds, {timeInMs: metricResult.timing}),

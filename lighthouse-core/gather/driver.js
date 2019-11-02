@@ -156,6 +156,15 @@ class Driver {
   }
 
   /**
+   * 
+   * @param {string} hostUserAgent
+   */
+  getHostDevice(hostUserAgent) {
+    return hostUserAgent.includes('Android') || hostUserAgent.includes('Mobile') ?
+      'mobile' : 'desktop';
+  }
+
+  /**
    * Computes the ULTRADUMB™ benchmark index to get a rough estimate of device class.
    * @return {Promise<number>}
    */
