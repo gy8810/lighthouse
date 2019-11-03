@@ -30,7 +30,5 @@ source /home/lighthouse/.env
 # Run the collection
 DEBUG=1 SAMPLES=9 node --max-old-space-size=4096 ./lighthouse-core/scripts/lantern/collect/collect.js
 
-cp /home/lighthouse/screen.log /home/lighthouse/previous-screen.log
-
 # Kill xvfb
 kill $!

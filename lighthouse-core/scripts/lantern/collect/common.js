@@ -25,7 +25,7 @@ class ProgressLogger {
     this._currentProgressMessage = '';
     this._loadingChars = '⣾⣽⣻⢿⡿⣟⣯⣷ ⠁⠂⠄⡀⢀⠠⠐⠈';
     this._nextLoadingIndex = 0;
-    this._progressBarHandle = setInterval(() => this.progress(this._currentProgressMessage), 100);
+    this._progressBarHandle = setInterval(() => this.progress(this._currentProgressMessage), 1000);
   }
 
   /**
