@@ -290,4 +290,5 @@ async function main() {
 main().catch(err => {
   if (log) log.closeProgress();
   process.stderr.write(`Fatal error in collect:\n\n  ${err.stack}`);
+  process.exit(1)
 })
