@@ -15,7 +15,7 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 
 # Install dependencies
 sudo apt-get update
-sudo apt-get install -y xvfb nodejs google-chrome-stable google-cloud-sdk git
+sudo apt-get install -y xvfb nodejs google-chrome-stable google-cloud-sdk git zip
 sudo npm install -g yarn
 
 # Add a lighthouse user
