@@ -6,8 +6,8 @@
 'use strict';
 
 /**
- * @fileoverview Run smokehouse from the command line. Run webservers,
- * smokehouse, then report on failures.
+ * @fileoverview A smokehouse frontend for running from the command line. Parse
+ * flags, start fixture webservers, then run smokehouse.
  */
 
 /* eslint-disable no-console */
@@ -60,7 +60,7 @@ function getDefinitionsToRun(allTestDefns, requestedIds) {
 /**
  * CLI entry point.
  */
-async function cli() {
+async function begin() {
   const argv = yargs
     .help('help')
     .usage('node $0 [<options>] <test-ids>')
@@ -110,7 +110,7 @@ async function cli() {
   process.exit(exitCode);
 }
 
-cli().catch(e => {
+begin().catch(e => {
   console.error(e);
   process.exit(1);
 });

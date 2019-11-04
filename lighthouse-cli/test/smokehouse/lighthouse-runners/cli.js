@@ -5,6 +5,13 @@
  */
 'use strict';
 
+/**
+ * @fileoverview  A runner that executes Lighthouse via the Lighthouse CLI to
+ * test the full pipeline, from parsing arguments on the command line to writing
+ * results to disk. When complete, reads back the artifacts and LHR and returns
+ * them.
+ */
+
 const fs = require('fs').promises;
 const os = require('os');
 const {promisify} = require('util');
@@ -14,8 +21,8 @@ const log = require('lighthouse-logger');
 const rimraf = promisify(require('rimraf'));
 
 const assetSaver = require('../../../../lighthouse-core/lib/asset-saver.js');
-const LocalConsole = require('../local-console.js');
-const ChildProcessError = require('./child-process-error.js');
+const LocalConsole = require('../lib/local-console.js');
+const ChildProcessError = require('../lib/child-process-error.js');
 
 /**
  * Launch Chrome and do a full Lighthouse run via the Lighthouse CLI.

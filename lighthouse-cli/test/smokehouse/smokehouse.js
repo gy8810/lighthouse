@@ -5,15 +5,21 @@
  */
 'use strict';
 
+/**
+ * @fileoverview An end-to-end test runner for Lighthouse. Takes a set of smoke
+ * test definitions and a method of running Lighthouse, returns whether all the
+ * smoke tests passed.
+ */
+
 const log = require('lighthouse-logger');
 const cliLighthouseRunner = require('./lighthouse-runners/cli.js').runLighthouse;
 const getAssertionReport = require('./report-assert.js');
-const LocalConsole = require('./local-console.js');
-const ConcurrentMapper = require('./concurrent-mapper.js');
+const LocalConsole = require('./lib/local-console.js');
+const ConcurrentMapper = require('./lib/concurrent-mapper.js');
 
 /* eslint-disable no-console */
 
-/** @typedef {import('./lighthouse-runners/child-process-error.js')} ChildProcessError */
+/** @typedef {import('./lib/child-process-error.js')} ChildProcessError */
 
 // The number of concurrent (`!runSerially`) tests to run if `jobs` isn't set.
 const DEFAULT_CONCURRENT_RUNS = 5;

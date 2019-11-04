@@ -57,7 +57,7 @@ However, if an array literal is used as the expectation, an extra condition is e
 The different frontends launch smokehouse with a set of tests to run. Smokehouse then coordinates the tests using a particular method of running Lighthouse (CLI, as a bundle, etc).
 
 ```
-Frontends                                                   Lighthouse Runners
+Smokehouse Frontends                                        Lighthouse Runners
 +------------+
 |            |
 |  bin (CLI) +----+                                           +--------------+
@@ -80,10 +80,10 @@ Frontends                                                   Lighthouse Runners
                               +-----------------+
 ```
 
-### Frontends
+### Smokehouse frontends
 - `frontends/smokehouse-bin.js` - runs smokehouse from the command line
 - TODO: bundle-entry - simple entrypoint to smokehouse for bundling and running in a browser.
-- `smokehouse.js` - smokehouse itself is runnable from node
+- `node.js` - run smokehouse from a node process
 
 ### Smokehouse
 - `smokehouse.js` - takes a set of smoke-test definitions and runs them via a passed-in runner. Smokehouse is bundleable and can run in a browser as long as runner used is bundleable as well.

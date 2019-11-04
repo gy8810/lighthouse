@@ -5,8 +5,13 @@
  */
 'use strict';
 
+/**
+ * @fileoverview An assertion library for comparing smoke-test expectations
+ * against the results actually collected from Lighthouse.
+ */
+
 const log = require('lighthouse-logger');
-const LocalConsole = require('./local-console.js');
+const LocalConsole = require('./lib/local-console.js');
 
 const NUMBER_REGEXP = /(?:\d|\.)+/.source;
 const OPS_REGEXP = /<=?|>=?|\+\/-|±/.source;
